@@ -1,0 +1,55 @@
+{{header}}
+
+{{ignore_me}}
+
+{{display_flag}}
+
+
+int validate (int door, int key, int pointless_var) {
+    switch (door) {
+        case 0:
+            return ((key - {{rv1}}) * {{rv2}} == {{rv3}});
+        case 1:
+            return (key * {{rv4}} == {{rv5}});
+        case 2:
+            return (key / {{rv6}} == {{rv7}});
+        case 3:
+            return (key * {{rv8}} == 0);
+        case 4:
+            return (key - {{rv9}} == {{rv10}});
+        default:
+            printf("<<< Not a valid door.\n");
+            break;
+    }
+    return 0;
+}
+
+int obfuscation_function(int pointless_variable, int key, int door) {
+    for (int i = 0; i < 20; i++) {
+        pointless_variable = (pointless_variable * key) + door;
+    }
+
+    return 0;
+}
+
+int challenge () {
+    int key;
+    int door;
+    int valid = 0;
+    int something = 0;
+    printf("There are 5 locked doors. Choose a door (0-4) >>> ");
+    scanf("%d", &door);
+    printf("Enter the key >>> ");
+    scanf("%d", &key);
+    something = obfuscation_function(something, key, door);
+    valid = validate(door, key, something);
+    if (valid == 1) {
+        display_flag("flag.txt");
+    } else {
+        printf("<<< You failed. Try Again \n");
+    }
+
+    return 0;
+}
+
+{{main}}

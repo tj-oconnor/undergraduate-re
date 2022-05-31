@@ -1,0 +1,28 @@
+{{header}}
+
+{{ignore_me}}
+
+void cmd_func() {
+    system("{{rand_cmd}}");
+}
+
+int closing_func() {
+    printf("<<< {{closing}} \n");
+ }
+
+void vuln() {
+    char buffer[{{buffersize}}];
+    printf(" >>>\n");
+    gets(buffer);
+    if (strcmp(buffer, "{{rand_word1}}") == 0) {
+        printf("<<< {{prompt}}! Heres a clue for you: /bin/cat flag.txt\n");
+    }
+    else if (strcmp(buffer, "{{rand_word2}}") == 0) {
+        cmd_func();
+    }
+    else {  
+        closing_func();
+    }
+}
+
+{{main}}

@@ -1,0 +1,39 @@
+{{header}}
+
+{{ignore_me}}
+
+int gadget1() {
+    {{pop_rdi}}
+}
+
+int gadget2() {
+    {{pop_rsi}}
+}
+
+int gadget3() {
+   {{pop_rdx}}
+}
+
+int gadget4() {
+   {{pop_rcx}}
+}
+
+int func() {
+    printf("<<< Date: ");
+    char *args[] = {"date", 0};
+    char *env[] = { 0 };
+    execve("/bin/date", args, env);
+    printf("<<< {{closing}}.\n");
+}
+
+void vuln() {
+    char buffer[{{buffersize}}];
+    printf("{{prompt}} >>>\n");
+    gets(buffer);
+    if (strcmp(buffer, "/bin/sh") == 0) {
+        printf("<<< {{result}} \n");
+        func();
+    }
+}
+
+{{main}}

@@ -1,0 +1,45 @@
+{{header}}
+
+{{ignore_me}}
+
+{{display_flag}}
+
+register int reg1 asm("{{reg1}}");
+register int reg2 asm("{{reg2}}");
+register int reg3 asm("{{reg3}}");
+
+int validate(int a, int b, int c) {
+ int d=0;
+ for(int i = 0; i <= b; ++i) {
+   d += a+b+c;
+ }
+ if (d=={{rand_val}}) {
+   return 1;
+ }
+ else {
+   return 0;
+ }
+}
+
+int challenge() {
+  srand(time(NULL));   
+  reg3 = rand();
+  printf("<<< Random nonce = %i\n",reg3);
+
+  printf("Login >>> ");
+
+  int i, j;
+  scanf("%d %d", &i, &j);
+  reg1 = i;
+  reg2 = j;
+
+  if (validate(reg1, reg2, reg3)) {
+    printf("\n<<< Authentication Succeeded.\n");
+    display_flag("flag.txt");
+  } else {
+    printf("<<< Authentication Failed.\n");
+  }
+  return 0;
+}
+
+{{main}}

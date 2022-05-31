@@ -1,0 +1,24 @@
+{{header}}
+
+{{ignore_me}}
+
+int pwnme;
+
+{{win_func}}
+
+int vuln()
+{
+  char buf[{{buffersize}}];
+
+  puts("{{greeting}} >>>\n");
+  fgets(buf, {{buffersize}}, stdin);
+  puts("{{resp}} <<< : ");
+  printf(buf);
+  puts("\n");
+
+  if(pwnme == {{rand_val}}) {
+    win();
+  } 
+}
+
+{{main}}

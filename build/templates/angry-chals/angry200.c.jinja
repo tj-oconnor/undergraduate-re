@@ -1,0 +1,36 @@
+{{header}}
+
+{{ignore_me}}
+
+{{display_flag}}
+
+int validate(int guess1, int guess2){
+  if (guess1==0) {
+    return 0;
+  }
+  if (guess1 > 0xffff) {
+    if (guess1 <<4 == guess2 ) {
+      return 1;
+    }
+  }
+  return 0;
+}
+
+
+int challenge() {
+  int guess1;
+  int guess2;
+
+  printf("Login >>> ");
+  scanf("%i %i", &guess1, &guess2);
+
+  if (validate(guess1,guess2)) {
+    printf("\n<<< Authentication Succeeded.\n");
+    display_flag("flag.txt");
+  } else {
+    printf("<<< Authentication Failed.\n");
+  }
+  return 0;
+}
+
+{{main}}

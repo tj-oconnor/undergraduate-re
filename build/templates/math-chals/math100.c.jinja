@@ -1,0 +1,26 @@
+{{header}}
+
+{{ignore_me}}
+
+{{display_flag}}
+
+
+int validate (int key) {
+    return (key % {{rand_int}}== 0);
+}
+
+int challenge () {
+    int key;
+    int valid;
+    printf("Enter the key >>> ");
+    scanf("%d", &key);
+    valid = validate(key);
+    if (valid == 1) {
+        display_flag("flag.txt");
+    } else {
+        printf("<<< You failed. Try Again \n");
+    }
+    return 0;
+}
+
+{{main}}

@@ -1,0 +1,15 @@
+{{header}}
+
+{{ignore_me}}
+
+{{win_func}}
+
+void vuln() {
+    char buffer[{{buffersize}}];
+    puts("{{greeting}} >>>\n");
+    read(STDIN_FILENO, buffer, {{buffersize+24}});
+    puts("<<< {{closing}}.\n");
+}
+
+{{main}}
+

@@ -1,0 +1,95 @@
+{{header}}
+
+{{ignore_me}}
+
+void explode_bomb(int phase) {
+  printf("<<< Phase %i Failed. Shutdown.\n",phase);
+  exit(0);
+}
+
+{{display_flag_fname}}
+
+void complete_phase(int phase) {
+  char flag[10];
+  printf("<<< Phase %i Complete\n",phase);
+  sprintf(flag,"flag%i.txt",phase);
+  display_flag(flag);
+}
+
+void phase1() {
+  char input[20];
+  printf("Defuse Phase 1 >>> ");
+  scanf("%21s", input);
+  if (strcmp(input, "{{phase1_word}}")!=0) {
+    explode_bomb(1);
+  }
+  else {
+    complete_phase(1);
+  }
+}
+
+void phase2() {
+  printf("Defuse Phase 2 >>> ");
+  int numbers[2];
+  int numScanned = scanf("%d %d",numbers, numbers + 1);
+  if (numScanned < 2) {
+    explode_bomb(2);
+  }
+  if (numbers[0]+numbers[1]!={{phase2_int}}) {
+    explode_bomb(2);
+  }
+  complete_phase(2);
+}
+
+void phase3() {
+  char input[20];
+  printf("Defuse Phase 3 >>> ");
+  scanf("%21s", input);
+  for (int i=0;input[i]!='\0';i++){
+    input[i]=input[i]+2;
+  }                 
+ if (strcmp(input, "{{phase3_str}}")!=0) {
+    explode_bomb(3);
+  }
+  else {
+    complete_phase(3);
+  }
+
+}
+
+void phase4() {
+  printf("Defuse Phase 4 >>> ");
+  int numbers[5];
+  int numScanned = scanf("%d %d %d %d %d",numbers, numbers + 1, numbers +2, numbers +3, numbers +4);
+  if (numScanned < 5) {
+    explode_bomb(4);
+  }
+  for (int i=1; i<5; i++){
+    int factor=numbers[i-1]*{{phase4_int}};
+    if (numbers[i]!=factor) {
+	explode_bomb(4);
+  }
+  }
+  complete_phase(4);
+}
+
+void phase5() {
+  char input[20];       
+  static int letters[]={{phase5_letters}};
+  printf("Defuse Phase 5 >>> ");
+  scanf("%21s", input);
+  for (int i=0;i<18;i++) {
+    if (input[i]!=letters[i]) {
+      explode_bomb(5);
+    }
+  }
+  complete_phase(5);
+}
+
+int main(int argc, char *argv[]) {
+  phase1();
+  phase2();
+  phase3();
+  phase4();
+  phase5();
+}

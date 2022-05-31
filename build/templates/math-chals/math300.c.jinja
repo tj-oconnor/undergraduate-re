@@ -1,0 +1,36 @@
+{{header}}
+
+{{ignore_me}}
+
+{{display_flag}}
+
+int fibonacci (int n) {
+    if (n == 0) {
+        return 0;
+    } else if (n == 1) {
+        return 1;
+    } else {
+        return (fibonacci(n - 1) + fibonacci(n - 2));
+    }
+}
+
+int challenge () {
+    int key;
+    int fib;
+    printf("Enter the key >>> ");
+    scanf("%d", &key);
+
+    if (key <= 250) {
+        fib = fibonacci(key);
+        if (fib == {{rv_fib}}) {
+            display_flag("flag.txt");
+        } else {
+            printf("<<< You failed. Try Again \n");
+        }
+    } else {
+        printf("<<< Please enter a number 0-250\n");
+    }
+    return 0;
+}
+
+{{main}}

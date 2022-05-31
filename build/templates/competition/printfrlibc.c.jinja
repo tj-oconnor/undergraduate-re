@@ -1,0 +1,18 @@
+{{header}}
+
+{{ignore_me}}
+
+int vuln()
+{
+  char s[{{buffersize}}];
+  printf("{{greeting}} >>>\n");
+  fgets(s, {{buffersize}}, stdin);
+  printf("\n<<< Leak: ");
+  printf(s, {{buffersize}});
+  printf("\n {{prompt}} >>>");
+  fgets(s, {{buffersize+24}}, stdin);
+  return 0;
+}
+
+{{main}}
+

@@ -1,0 +1,44 @@
+{{header}}
+
+{{ignore_me}}
+
+int gadget_1() {
+   {{pop_rax}}
+}
+
+int gadget_2() {
+   {{pop_rdi}}
+}
+
+int gadget_3() {
+   {{pop_rsi}}
+}
+
+int gadget_4() {
+   {{pop_rdx}}
+}
+
+int gadget_5() {
+   {{syscall_gadget}}
+}
+
+int func() {
+    unsigned cpu;
+    syscall(SYS_getcpu, &cpu, NULL, NULL);
+    printf("<<< CPUs %u .\n", cpu); 
+    return 0;
+}
+
+void vuln() {
+    char buffer[{{buffersize}}];
+    printf("{{prompt}} >>>\n");
+    gets(buffer);
+    if (strcmp(buffer, "/bin/sh") == 0) {
+        printf("<<< No {{rand_word}} for you.\n");
+        func();
+    }
+    printf("<<< {{closing}}.\n");
+}
+
+{{main}}
+

@@ -1,0 +1,22 @@
+{{header}}
+
+{{ignore_me}}
+
+void win(int a, int b) {
+  printf("{{rand_word}}\n");
+  if ((a=={{rand_val1}}) && (b={{rand_val2}})) {
+    {{win_cmd}}
+  }
+}
+
+int vuln()
+{
+  char buf[{{buffersize}}];
+  printf("{{greeting}} >>>\n");
+  gets(buf);
+  printf("<<< {{closing}}");
+
+}
+
+{{main}}
+

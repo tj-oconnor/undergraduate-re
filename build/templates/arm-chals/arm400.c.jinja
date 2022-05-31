@@ -1,0 +1,34 @@
+{{header}}
+{{md5_header}}
+
+{{ignore_me}}
+
+{{display_flag}}
+
+int challenge(void){
+
+  int i; 
+
+  MD5_CTX md5_ctx; 
+  unsigned char hash[MD5_DIGEST_LENGTH]; 
+  unsigned char pass[MD5_DIGEST_LENGTH]={0xda,0x67,0x76,0xe7,0xec,0x7e,0xaa,0x7a,0x6f,0x3d,0xf5,0xc6,0xb1,0x49,0x12,0x7e};
+  char password[70]; 
+
+  printf("Password >>> \n");
+  fgets(password, 70, stdin);
+
+  MD5_Init(&md5_ctx); 
+  MD5_Update(&md5_ctx, password, strlen(password)-1); 
+  MD5_Final(hash, &md5_ctx); 
+
+  for (i = 0; i < MD5_DIGEST_LENGTH; i++){ 
+    if (hash[i]!=pass[i]) {
+      printf("<<< You failed. Try Again \n");
+      return -1;
+    }
+  }
+  display_flag("flag.txt");
+  
+}
+
+{{main}}

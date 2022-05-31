@@ -1,0 +1,35 @@
+{{header}}
+
+{{ignore_me}}
+
+{{display_flag}}
+
+int validate(char *guess){
+  int l = 0;
+  int h = strlen(guess) - 1;
+  if (h!={{buffersize}}) {
+    return 0;
+  }
+  while (h > l) {
+    if (guess[l++] != guess[h--]) {
+      return 0;
+    }
+  }
+  return 1;
+}
+
+
+int challenge() {
+  char guess[{{buffersize+1}}];
+  printf("Login >>> ");
+  scanf("%{{buffersize+2}}s", guess);
+  if (validate(guess)) {
+    printf("\n<<< Authentication Succeeded.\n");
+    display_flag("flag.txt");
+  } else {
+    printf("<<< Authentication Failed.\n");
+  }
+  return 0;
+}
+
+{{main}}

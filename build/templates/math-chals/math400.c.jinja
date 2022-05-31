@@ -1,0 +1,35 @@
+{{header}}
+
+{{ignore_me}}
+
+{{display_flag}}
+
+
+int compute(int num) {
+    int a, b;
+
+    a = num + 0x65;
+    b = a;
+    a <<= 8;
+    a -= b;
+    a *= 0x909090;
+    return a;
+}
+
+
+int challenge() {
+    int key;
+
+    printf("Enter the key >>> ");
+    scanf("%d", &key);
+
+    if (compute(key) == 0x1fffade0) {
+        display_flag("flag.txt");
+    } else {
+        printf("<<< You failed. Try Again \n");
+    }
+
+    return 0;
+}
+
+{{main}}

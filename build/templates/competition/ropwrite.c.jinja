@@ -1,0 +1,36 @@
+{{header}}
+
+{{ignore_me}}
+
+int gadget1() {
+  {{pop_reg1}}
+}
+
+int gadget2() {
+  {{pop_reg2}}
+}
+
+int gadget3() {
+  {{mov_reg1_reg2}}
+}
+
+int gadget4() {
+  {{pop_rdi}}
+}
+
+int func() {
+    printf("<<< {{greeting}}: ");
+    system("{{rand_cmd}}");
+    return 0;
+}
+
+void vuln() {
+    char buffer[{{buffersize}}];
+
+    printf(" {{prompt}} >>>\n");
+    gets(buffer);
+    printf("<<< {{closing}}.\n");
+}
+
+{{main}}
+

@@ -1,0 +1,19 @@
+{{header}}
+
+{{ignore_me}}
+
+{{win_func}}
+
+int vuln()
+{
+  char buf[{{buffersize}}];
+  puts("{{greeting}} >>>\n");
+  fgets(buf, {{buffersize}}, stdin);
+  printf("{{closing}} <<< : ");
+  printf(buf);
+  putchar('\n');
+
+}
+
+{{main}}
+

@@ -1,0 +1,24 @@
+{{header}}
+
+{{ignore_me}}
+
+void vuln() {
+   FILE *fp;
+   char guess[{{buffersize}}];
+   char flag[255];
+   fp = fopen("flag.txt","r");
+   fscanf(fp, "%s", flag);
+
+   puts("{{greeting}} >>>");
+   scanf("%8s", guess);
+
+  if (strcmp(flag,guess)==0) {
+     printf("<<<{{prompt1}}: %{{buffersize}}s",guess);}
+  else  {
+    printf("<<< {{prompt2}}: ");
+    printf(guess);
+    printf("\n{{closing}}\n");
+   }
+}
+
+{{main}}

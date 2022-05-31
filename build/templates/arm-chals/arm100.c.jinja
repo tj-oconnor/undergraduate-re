@@ -1,0 +1,28 @@
+{{header}}
+
+{{ignore_me}}
+
+char* flag = "{{rand_word}}";
+
+{{display_flag}}
+
+int challenge() {
+	char input[70];
+	printf("You must not pass >>> \n");
+	fgets(input, 70, stdin);
+
+	for(int i = 0; i < strlen(flag) - 1; i++) {
+		if(input[i] != flag[i]) {
+			printf("<<< You failed. Try Again \n");
+			return -1;
+		}
+	}
+	display_flag("flag.txt");
+	return 0;
+}
+
+int main() {
+	challenge();
+	fflush(stdout); 
+	return 0;
+}

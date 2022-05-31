@@ -1,0 +1,37 @@
+{{header}}
+
+{{ignore_me}}
+
+{{display_flag}}
+
+char* guess1;
+char* guess2;
+ 
+int challenge() {
+  guess1 = malloc(9);
+  guess2 = malloc(9);
+  memset(guess1, 0, 9);
+  memset(guess2, 0, 9);
+
+
+  printf("Login >>> ");
+  scanf("%8s %8s", guess1,guess2);
+
+  for (int i=0; i<strlen(guess1); i++) {
+    guess1[i]=guess1[i]+32;
+  }
+  if (strlen(guess1)<4) {
+    printf("<<< Authentication Failed.\n");
+    return -1;
+  }
+ 
+  if (strncmp(guess1,guess2, 8)) {
+    printf("<<< Authentication Failed.\n");
+  } else {
+    printf("\n<<< Authentication Succeeded.\n");
+    display_flag("flag.txt");
+  }
+
+}
+
+{{main}}

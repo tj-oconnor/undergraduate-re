@@ -1,0 +1,14 @@
+{{header}}
+
+{{ignore_me}}
+
+void vuln() {
+    char buffer[{{buffersize}}];
+    printf("<<< Leak: %p\n",{{rand_func}});
+    puts(" {{prompt}} >>>\n");
+    gets(buffer);
+    puts("<<< {{closing}}.\n");
+}
+
+{{main}}
+
