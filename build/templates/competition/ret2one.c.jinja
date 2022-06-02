@@ -5,9 +5,9 @@
 void vuln() {
     char buffer[{{buffersize}}];
     printf("<<< Leak: %p\n",{{rand_func}});
-    puts(" {{prompt}} >>>\n");
+    printf(" {{prompt}} >>>\n");
     gets(buffer);
-    puts("<<< {{closing}}.\n");
+    printf("<<< {{closing}}.\n");
 }
 
 {{main}}

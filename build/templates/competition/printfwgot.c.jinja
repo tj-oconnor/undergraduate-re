@@ -7,7 +7,7 @@
 int vuln()
 {
   char buf[{{buffersize}}];
-  puts("{{greeting}} >>>\n");
+  printf("{{greeting}} >>>\n");
   fgets(buf, {{buffersize}}, stdin);
   printf("{{closing}} <<< : ");
   printf(buf);

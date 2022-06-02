@@ -12,9 +12,9 @@ int vuln()
 
   puts("{{greeting}} >>>\n");
   fgets(buf, {{buffersize}}, stdin);
-  puts("{{resp}} <<< : ");
+  printf("{{resp}} <<< : ");
   printf(buf);
-  puts("\n");
+  printf("\n");
 
   if(pwnme == {{rand_val}}) {
     win();
