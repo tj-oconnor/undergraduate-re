@@ -6,7 +6,7 @@
 
 
 int validate (int key) {
-    return (key % {{rand_int}}== 0);
+    return (key % {{rand_int}});
 }
 
 int challenge () {
@@ -15,7 +15,7 @@ int challenge () {
     printf("Enter the key >>> ");
     scanf("%d", &key);
     valid = validate(key);
-    if (valid == 1) {
+    if (valid == 0) {
         display_flag("flag.txt");
     } else {
         printf("<<< You failed. Try Again \n");

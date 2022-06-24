@@ -19,7 +19,7 @@ RUN python3 -m pip install --no-cache-dir \
 RUN dpkg --add-architecture armhf && \
     dpkg --add-architecture armel && \
     apt-get update -y && \
-    apt-get -y install libssl-dev:armhf libssl-dev:armel && \
+    apt-get -y install libssl-dev libssl-dev:armhf libssl-dev:armel && \
     rm -rf /var/lib/apt/lists/*
 
 # setup environment

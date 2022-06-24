@@ -12,9 +12,9 @@ RUN git clone https://github.com/qilingframework/rootfs
 
 RUN useradd -m user
 
-COPY flag/flag.txt /home/user/flag.txt
-RUN chown root:root /home/user/flag.txt
-RUN chmod 644 /home/user/flag.txt
+COPY flag/flag.txt /flag.txt
+RUN chown root:root /flag.txt
+RUN chmod 644 /flag.txt
 
 COPY shell/* /home/user/pyshell.py
 RUN chown user:user /home/user/pyshell.py

@@ -12,7 +12,7 @@ int challenge()
     printf("<<< Welcome to ARM Industries.\n");
     printf("<<< Current Time Is: %02d:%02d:%02d\n", tm.tm_hour, tm.tm_min, tm.tm_sec);
 
-    if ((tm.tm_hour=={{rand_hr}} && tm.tm_min > {{rand_min_min}}) || (tm.tm_hour=={{rand_hr}} && tm.tm_min < {{rand_min_max}})) {
+    if ((tm.tm_hour=={{rand_hr}} && tm.tm_min > {{rand_min_min}}) && (tm.tm_hour=={{rand_hr}} && tm.tm_min < {{rand_min_max}})) {
        display_flag("flag.txt");
        return 0;
     }

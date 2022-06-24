@@ -99,7 +99,7 @@ def rand_qword(min_num=0, max_num=0xFFFFFFFFFFFFFFFF):
 def rand_char_array(array_len=8):
     array_str = '{'
     for i in range(array_len):
-        rand_char = hex(rand_int(0x0, 0xff))
+        rand_char = hex(rand_int(65, 122))
         array_str += rand_char+','
     array_str = array_str[:-1]+'}'
     return array_str

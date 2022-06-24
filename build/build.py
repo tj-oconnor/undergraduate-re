@@ -24,7 +24,6 @@ def arm_compile(source_code, bin_name, flags='-no-pie -fno-stack-protector'):
         bin_name, source_file.name, flags)
     os.system(cmd)
 
-
 def gen_ret2win(bin_name):
     template = jinja2.Template(
         open('templates/competition/ret2win.c.jinja', 'r').read())
@@ -183,7 +182,7 @@ def gen_arm_100(bin_name):
         open('templates/arm-chals/arm100.c.jinja', 'r').read())
     source_code = template.render(header=header_includes(), ignore_me=func_ignore_me(
     ), display_flag=func_display_flag(), main=main_chal_func(), rand_word=rand_word())
-    arm_compile(source_code, bin_name, flags='-no-pie -s')
+    arm_compile(source_code, bin_name, flags='-no-pie')
 
 
 def gen_arm_200(bin_name):
@@ -193,7 +192,7 @@ def gen_arm_200(bin_name):
     r_max = r_min + 15
     source_code = template.render(header=header_includes(), ignore_me=func_ignore_me(), display_flag=func_display_flag(
     ), main=main_chal_func(), rand_hr=rand_int(9, 16), rand_min_min=r_min, rand_min_max=r_max)
-    arm_compile(source_code, bin_name, flags='-no-pie -s')
+    arm_compile(source_code, bin_name, flags='-no-pie')
 
 
 def gen_arm_300(bin_name):
@@ -201,15 +200,15 @@ def gen_arm_300(bin_name):
         open('templates/arm-chals/arm300.c.jinja', 'r').read())
     source_code = template.render(header=header_includes(
     ), ignore_me=func_ignore_me(), display_flag=func_display_flag(), main=main_chal_func())
-    arm_compile(source_code, bin_name, flags='-no-pie -s')
+    arm_compile(source_code, bin_name, flags='-no-pie')
 
 
 def gen_arm_400(bin_name):
     template = jinja2.Template(
         open('templates/arm-chals/arm400.c.jinja', 'r').read())
     source_code = template.render(header=header_includes(), md5_header=md5_header(
-    ), ignore_me=func_ignore_me(), display_flag=func_display_flag(), main=main_chal_func())
-    arm_compile(source_code, bin_name, flags='-lcrypto')
+    ), ignore_me=func_ignore_me(), display_flag=func_display_flag(), main=main_chal_func(),rand_int=rand_int(1, 26),rand_word=rand_str(str_len=8))
+    arm_compile(source_code, bin_name, flags='-no-pie')
 
 
 def gen_angry_100(bin_name):
