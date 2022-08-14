@@ -235,7 +235,7 @@ def gen_angry_300(bin_name):
     template = jinja2.Template(
         open('templates/angry-chals/angry300.c.jinja', 'r').read())
     source_code = template.render(header=header_includes(), ignore_me=func_ignore_me(), display_flag=func_display_flag(
-    ), main=main_chal_func(), reg1=reg1, reg2=reg2, reg3=reg3, rand_val=rand_int(0xffff, 0xffffffff))
+    ), main=main_chal_func(), reg1=reg1, reg2=reg2, reg3=reg3)
     compile(source_code, bin_name)
 
 
