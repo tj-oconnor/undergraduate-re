@@ -20,7 +20,6 @@ RUN apt-get install -y \
     nano \
     nasm \
     pkg-config \
-    qemu-system-mipsel \
     tmux \
     wget 
 
@@ -44,8 +43,11 @@ RUN python3 -m pip install --no-cache-dir \
     ropper \
     sudo \
     unicorn \
-    z3-solver \
-    xortool
+    z3-solver 
+
+# install angrop from source -- fixes "rop" import error
+RUN cd /opt/ && git clone https://github.com/angr/angrop && \
+    cd angrop && pip3 install . 
 
 # install pwndbg
 RUN cd /opt/ && git clone https://github.com/pwndbg/pwndbg && \
