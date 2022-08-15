@@ -17,20 +17,47 @@ int challenge() {
   printf("Login >>> ");
   scanf("%8s %8s", guess1,guess2);
 
-  for (int i=0; i<strlen(guess1); i++) {
-    guess1[i]=guess1[i]+32;
-  }
-  if (strlen(guess1)<4) {
+  if (strlen(guess1)<8) {
     printf("<<< Authentication Failed.\n");
     return -1;
   }
- 
-  if (strncmp(guess1,guess2, 8)) {
-    printf("<<< Authentication Failed.\n");
-  } else {
-    printf("\n<<< Authentication Succeeded.\n");
-    display_flag("flag.txt");
+
+  for (int i=0; i<strlen(guess1); i++) {
+    if (guess1[i] < 65 || guess1[i] > 122 || guess2[i] < 65 || guess2[i] > 122) {
+       printf("<<< Authentication Failed.\n");
+       return -1;
+    }
   }
+
+  if (guess1[0]+guess1[1]+guess1[2]!=0xC6) {
+    printf("<<< Authentication Failed.\n");
+    return -1;
+  }
+
+  if (guess2[5]+guess2[6]+guess2[7]!=0x15e) {
+    printf("<<< Authentication Failed.\n");
+    return -1;
+  }
+
+  if (guess2[3]!=0x71) {
+    printf("<<< Authentication Failed.\n");
+    return -1;
+  }
+
+  for (int i=0; i<strlen(guess1); i++) {
+    if (guess2[i]!=guess1[i]+32+i) {
+      printf("<<< Authentication Failed.\n");
+      return -1;
+    }
+  }
+
+  if (guess1[6]!=guess1[7] || guess2[3]!=guess2[5]) {
+      printf("<<< Authentication Failed.\n");
+      return -1;
+  }
+
+  printf("\n<<< Authentication Succeeded.\n");
+  display_flag("flag.txt");
 
 }
 
