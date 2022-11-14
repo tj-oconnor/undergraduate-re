@@ -46,8 +46,8 @@ RUN python3 -m pip install --no-cache-dir \
     z3-solver 
 
 # install angrop from source -- fixes "rop" import error
-RUN cd /opt/ && git clone https://github.com/angr/angrop && \
-    cd angrop && pip3 install . 
+# RUN cd /opt/ && git clone https://github.com/angr/angrop && \
+#    cd angrop && pip3 install . 
 
 # install pwndbg
 RUN cd /opt/ && git clone https://github.com/pwndbg/pwndbg && \
@@ -80,10 +80,11 @@ ENV LANG en_US.UTF-8
 RUN sh -c "$(wget -O- https://github.com/deluan/zsh-in-docker/releases/download/v1.1.2/zsh-in-docker.sh)" -- \
     -t crunch
 
+
 WORKDIR /
 
-COPY bins/bins.tar.gz /bins.tar.gz
-RUN tar -xvzf /bins.tar.gz
+#COPY bins/bins.tar.gz /bins.tar.gz
+#RUN tar -xvzf /bins.tar.gz
 RUN rm -rf /bins/._*
 COPY solution/* /aeg.py 
 COPY /flag/flag.txt /flag.txt
