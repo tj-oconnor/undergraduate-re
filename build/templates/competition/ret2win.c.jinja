@@ -1,3 +1,5 @@
+#pragma optimize("puts", off)
+
 {{header}}
 
 {{ignore_me}}
@@ -6,9 +8,9 @@
 
 void vuln() {
     char buffer[{{buffersize}}];
-    puts("{{greeting}} >>>\n");
+    printf("\n{{greeting}} >>>\n");
     read(STDIN_FILENO, buffer, {{buffersize+32}});
-    puts("<<< {{closing}}.\n");
+    printf("\n<<< {{closing}}.\n");
 }
 
 {{main}}

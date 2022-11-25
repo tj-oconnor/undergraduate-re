@@ -143,6 +143,7 @@ def rand_null_word():
 
 def header_includes():
     includes = """
+    #pragma GCC diagnostic ignored "-Wimplicit-function-declaration"
     #include <stdio.h>
     #include <stdlib.h>
     #include <string.h>

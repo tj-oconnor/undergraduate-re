@@ -5,7 +5,7 @@ import sys
 import tempfile
 from helper_funcs import *
 
-def compile(source_code, bin_name, flags='-no-pie -fno-stack-protector'):
+def compile(source_code, bin_name, flags='-no-pie -fno-stack-protector -fno-builtin -Wno-all -Wno-extra'):
     source_file = tempfile.NamedTemporaryFile(
         mode='w', buffering=- 1, suffix='.c', prefix='src-', dir='./src', delete=False)
     source_file.write(source_code)
