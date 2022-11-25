@@ -275,48 +275,48 @@ def build_competition_bins():
 
     print("[+] Randomly generating and compiling competition binaries.")
     bin_cnt = 0
-    for i in range(10):
-        bin_name = 'bin-%i' % bin_cnt
+    for i in range(2):
+        bin_name = 'bin-ret2win-%i' % bin_cnt
         gen_ret2win(bin_name)
         bin_cnt += 1
 
-        bin_name = 'bin-%i' % bin_cnt
+        bin_name = 'bin-ret2execve-%i' % bin_cnt
         gen_ret2execve(bin_name)
         bin_cnt += 1
         
-        bin_name = 'bin-%i' % bin_cnt
+        bin_name = 'bin-ret2syscall-%i' % bin_cnt
         gen_ret2syscall(bin_name)
         bin_cnt += 1
         
-        bin_name = 'bin-%i' % bin_cnt
+        bin_name = 'bin-ret2system-%i' % bin_cnt
         gen_ret2system(bin_name)
         bin_cnt += 1
         
-        bin_name = 'bin-%i' % bin_cnt
+        bin_name = 'bin-ret2one-%i' % bin_cnt
         gen_ret2one(bin_name)
         bin_cnt += 1
         
-        bin_name = 'bin-%i' % bin_cnt
+        bin_name = 'bin-ropwrite-%i' % bin_cnt
         gen_write_gadgets(bin_name)
         bin_cnt += 1
         
-        bin_name = 'bin-%i' % bin_cnt
+        bin_name = 'bin-printfr-%i' % bin_cnt
         gen_printf_read_var(bin_name)
         bin_cnt += 1
         
-        bin_name = 'bin-%i' % bin_cnt
+        bin_name = 'bin-printflibc-%i' % bin_cnt
         gen_printf_read_libc(bin_name)
         bin_cnt += 1
         
-        bin_name = 'bin-%i' % bin_cnt
+        bin_name = 'bin-printf-%i' % bin_cnt
         gen_printf_write_var(bin_name)
         bin_cnt += 1
 
-        bin_name = 'bin-%i' % bin_cnt
+        bin_name = 'bin-got-overwrite-%i' % bin_cnt
         gen_printf_got_overwrite(bin_name)
         bin_cnt += 1
 
-        bin_name = 'bin-%i' % bin_cnt
+        bin_name = 'bin-params-%i' % bin_cnt
         gen_rop_parameters(bin_name)
         bin_cnt += 1
         

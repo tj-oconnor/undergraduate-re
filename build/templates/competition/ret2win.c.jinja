@@ -7,7 +7,7 @@
 void vuln() {
     char buffer[{{buffersize}}];
     puts("{{greeting}} >>>\n");
-    read(STDIN_FILENO, buffer, {{buffersize+24}});
+    read(STDIN_FILENO, buffer, {{buffersize+32}});
     puts("<<< {{closing}}.\n");
 }
 

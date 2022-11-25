@@ -1,4 +1,5 @@
-FROM kalilinux/kali-rolling
+#FROM kalilinux/kali-rolling
+FROM ubuntu:18.04
 
 MAINTAINER tj <toconnor@fit.edu>
 
@@ -16,11 +17,11 @@ RUN python3 -m pip install --no-cache-dir \
     jinja2 pyfiglet randomname
 
 ## some cross-compilation stuff
-RUN dpkg --add-architecture armhf && \
-    dpkg --add-architecture armel && \
-    apt-get update -y && \
-    apt-get -y install libssl-dev libssl-dev:armhf libssl-dev:armel && \
-    rm -rf /var/lib/apt/lists/*
+#RUN dpkg --add-architecture armhf && \
+#    dpkg --add-architecture armel && \
+#    apt-get update -y && \
+#    apt-get -y install libssl-dev libssl-dev:armhf libssl-dev:armel && \
+#    rm -rf /var/lib/apt/lists/*
 
 # setup environment
 RUN mkdir -p /root/workspace

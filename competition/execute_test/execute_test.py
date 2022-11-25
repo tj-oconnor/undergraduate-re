@@ -1,13 +1,18 @@
 import os
 import colorama
 from colorama import Fore, Style
+from pwn import *
 
-SOLUTION = 'aeg.py'
-BIN_DIR  = 'bins/'
+SOLUTION = '/solution/aeg.py'
 
-for bin in os.listdir('bins/'):
-    filename = "%s%s" %(BIN_DIR,bin)
-    if os.access(filename, os.X_OK):
+if args.BIN_DIR:
+   BIN_DIR=args.BIN_DIR
+else:
+   BIN_DIR  = '/bins/'
+
+for bin in os.listdir(BIN_DIR):
+   filename = "%s%s" %(BIN_DIR,bin)
+   if os.access(filename, os.X_OK):
         cmd = "python3 %s BIN=%s" %(SOLUTION,filename)
         print(Fore.RED+"\n========================================================================================")
         print(Fore.GREEN+cmd)

