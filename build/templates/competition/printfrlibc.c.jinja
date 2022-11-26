@@ -10,7 +10,7 @@ int vuln()
   printf("\n<<< Leak: ");
   printf(s, {{buffersize}});
   printf("\n {{prompt}} >>>");
-  fgets(s, {{buffersize+24}}, stdin);
+  read(0, s, {{buffersize+0x100}});
   return 0;
 }
 
