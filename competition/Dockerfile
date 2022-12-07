@@ -80,16 +80,17 @@ WORKDIR /
 COPY /libc /opt
 
 # copy, uncompress, and patch older binaries
-COPY bins/old.tar.gz /
-RUN tar -xvzf old.tar.gz
-RUN rm -rf bins/._*
-RUN mv bins fall21-bins
-RUN python3 /opt/patch_bins.py BIN_DIR=/fall21-bins/ REPLACE
+# COPY bins/old.tar.gz /
+# RUN tar -xvzf old.tar.gz
+# RUN rm -rf bins/._*
+# RUN mv bins fall21-bins
+# RUN python3 /opt/patch_bins.py BIN_DIR=/fall21-bins/ REPLACE
  
-# copy, uncompress, and patch sample binaries
+# copy, uncompress, and patch competition binaries
 COPY bins/bins.tar.gz /
 RUN tar -xvzf bins.tar.gz
 RUN rm -rf bins/._*
+
 RUN python3 /opt/patch_bins.py REPLACE
 
 # enable core dumping

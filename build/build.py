@@ -274,8 +274,7 @@ def build_angry_lab():
 def build_competition_bins():
 
     print("[+] Randomly generating and compiling competition binaries.")
-    bin_cnt = 0
-    for i in range(1):
+    for bin_cnt in range(0,10):
         bin_name = 'bin-ret2win-%i' % bin_cnt
         gen_ret2win(bin_name)
 
@@ -297,8 +296,8 @@ def build_competition_bins():
         bin_name = 'bin-printf_read_var-%i' % bin_cnt
         gen_printf_read_var(bin_name)
         
-        bin_name = 'bin-printf_read_libc-%i' % bin_cnt
-        gen_printf_read_libc(bin_name)
+        #bin_name = 'bin-printf_read_libc-%i' % bin_cnt
+        #gen_printf_read_libc(bin_name)
         
         bin_name = 'bin-printf_write_var-%i' % bin_cnt
         gen_printf_write_var(bin_name)
@@ -308,7 +307,6 @@ def build_competition_bins():
 
         bin_name = 'bin-rop_parameters-%i' % bin_cnt
         gen_rop_parameters(bin_name)
-        bin_cnt += 1
         
 
 if __name__ == '__main__':
