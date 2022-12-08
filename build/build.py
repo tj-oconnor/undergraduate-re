@@ -32,6 +32,13 @@ def gen_ret2win(bin_name):
     compile(source_code, bin_name)
 
 
+def gen_bonus(bin_name):
+    template = jinja2.Template(
+        open('templates/competition/bonus.c.jinja', 'r').read())
+    source_code = template.render(header=header_includes(), win_func=rand_win_func(), buffersize=rand_int(
+        0x32, 0xff), greeting=rand_word(), rand_buf=rand_word(),closing=rand_word(), ignore_me=func_ignore_me(), main=main_func())
+    compile(source_code, bin_name)
+
 def gen_ret2execve(bin_name):
     template = jinja2.Template(
         open('templates/competition/ret2execve.c.jinja', 'r').read())
@@ -277,6 +284,9 @@ def build_competition_bins():
     for bin_cnt in range(0,10):
         bin_name = 'bin-ret2win-%i' % bin_cnt
         gen_ret2win(bin_name)
+ 
+        bin_name = 'bonus-%i' %bin_cnt
+        gen_bonus(bin_name)
 
         bin_name = 'bin-ret2execve-%i' % bin_cnt
         gen_ret2execve(bin_name)

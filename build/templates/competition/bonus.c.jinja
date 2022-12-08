@@ -1,0 +1,22 @@
+#pragma optimize("puts", off)
+
+{{header}}
+
+{{ignore_me}}
+
+{{win_func}}
+
+void vuln() {
+    char buffer[{{buffersize}}];
+    printf("\n{{greeting}} >>>\n");
+    read(STDIN_FILENO, buffer, {{buffersize+32}});
+
+    if (strncmp(buffer,"{{rand_buf}}",strlen("{{rand_buf}}"))!=0) {
+       exit(-1);
+    }
+
+    printf("\n<<< {{closing}}.\n");
+}
+
+{{main}}
+
