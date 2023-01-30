@@ -14,4 +14,10 @@ The following repository contains the containers, labs, and code used in our rev
 | [labs](labs) | Our labs and binary templates |
 | [readings](readings) | Our suggested student readings |
 
+## Student Work
 
+The following student projects have been built during our CSE4830 Course.
+
+- [Rage Against the Machine](https://github.com/AlexSchmith/RageAgainstTheMachine)
+- [Format And ROP Toolkit](https://github.com/condor0010/F.A.R.T)
+- [Solar Panth3r](https://github.com/tpetersen2018/AutoExploitFinal)
