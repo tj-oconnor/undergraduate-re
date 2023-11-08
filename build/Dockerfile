@@ -13,7 +13,7 @@ RUN apt-get install -y python3 python3-pip \
 
 # install python3 libraries
 RUN python3 -m pip install --no-cache-dir \
-    jinja2 pyfiglet randomname
+    jinja2 pyfiglet==0.8.post1 randomname 
 
 # setup environment
 RUN mkdir -p /root/workspace
