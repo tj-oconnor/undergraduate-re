@@ -1,0 +1,24 @@
+{{header}}
+
+{{ignore_me}}
+
+{{win_func}}
+
+{{chaf}}
+
+{{rand_items}}
+
+void vuln() {
+        for (int i = 0; items[i] != NULL; i++) {
+            printf("%i: %s\n", i,items[i]);
+        }
+
+        int choice;
+        printf("\nWhich item would you like to edit [0-{{sz-1}}] >>> ");
+        scanf("%i",&choice);
+
+        printf("Replace it with a new item >>>");
+        scanf("%24s",&items[choice]);
+}
+
+{{main}}

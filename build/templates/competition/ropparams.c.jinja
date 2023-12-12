@@ -2,10 +2,12 @@
 
 {{ignore_me}}
 
-void win(int a, int b) {
+void constrained_win(int a, int b) {
+  {{win_char}}
+
   printf("{{rand_word}}\n");
-  if ((a=={{rand_val1}}) && (b={{rand_val2}})) {
-    {{win_cmd}}
+  if ((a=={{rand_val1}}) && (b=={{rand_val2}})) {
+    system(cmd);
   }
 }
 
@@ -13,7 +15,15 @@ int vuln()
 {
   char buf[{{buffersize}}];
   printf("{{greeting}} >>>\n");
+
+  uint64_t target=(uint64_t)(&__libc_csu_init)+90;
+  {{define_target}}
+
   gets(buf);
+
+  {{check_target}}
+
+
   printf("<<< {{closing}}");
 
 }

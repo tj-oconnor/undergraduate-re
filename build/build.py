@@ -5,7 +5,8 @@ import sys
 import tempfile
 from helper_funcs import *
 
-def compile(source_code, bin_name, flags='-no-pie -fno-stack-protector -fno-builtin -Wno-all -Wno-extra'):
+
+def compile(source_code, bin_name, flags='-Wstringop-overflow -Wno-deprecated-declarations -ldl -no-pie -fno-stack-protector -fno-builtin -Wno-all -Wno-extra'):
     source_file = tempfile.NamedTemporaryFile(
         mode='w', buffering=- 1, suffix='.c', prefix='src-', dir='./src', delete=False)
     source_file.write(source_code)
@@ -24,6 +25,16 @@ def arm_compile(source_code, bin_name, flags='-no-pie -fno-stack-protector'):
         bin_name, source_file.name, flags)
     os.system(cmd)
 
+
+def gen_arrayabuse(bin_name):
+    template = jinja2.Template(
+        open('templates/competition/arrayabuse.c.jinja', 'r').read())
+    sz = rand_int(0x4, 0xf)
+    source_code = template.render(header=header_includes(), win_func=rand_win_func(), sz=sz, rand_items=rand_list(
+        sz), chaf=rand_chaf(rand_int(0x4, 0xf)), ignore_me=func_ignore_me(), main=main_func())
+    compile(source_code, bin_name)
+
+
 def gen_ret2win(bin_name):
     template = jinja2.Template(
         open('templates/competition/ret2win.c.jinja', 'r').read())
@@ -36,8 +47,9 @@ def gen_bonus(bin_name):
     template = jinja2.Template(
         open('templates/competition/bonus.c.jinja', 'r').read())
     source_code = template.render(header=header_includes(), win_func=rand_win_func(), buffersize=rand_int(
-        0x32, 0xff), greeting=rand_word(), rand_buf=rand_word(),closing=rand_word(), ignore_me=func_ignore_me(), main=main_func())
+        0x32, 0xff), greeting=rand_word(), rand_buf=rand_word(), closing=rand_word(), ignore_me=func_ignore_me(), main=main_func())
     compile(source_code, bin_name)
+
 
 def gen_ret2execve(bin_name):
     template = jinja2.Template(
@@ -80,10 +92,11 @@ def gen_ret2one(bin_name):
 
 
 def gen_rop_parameters(bin_name):
+    buffersize = rand_int(0x32, 0xff)
     template = jinja2.Template(
         open('templates/competition/ropparams.c.jinja', 'r').read())
-    source_code = template.render(header=header_includes(), rand_val1=rand_int(0x32, 0xff), rand_val2=rand_int(0x32, 0xff), win_cmd=rand_win_cmd(), buffersize=rand_int(
-        0x32, 0xff), rand_func=rand_func(), rand_word=rand_word(), greeting=rand_word(), closing=rand_word(), ignore_me=func_ignore_me(), main=main_func())
+    source_code = template.render(header=header_includes(), rand_val1=rand_int(0x32, 0xff), rand_val2=rand_int(0x32, 0xff), win_cmd=rand_win_cmd(), buffersize=buffersize, rand_func=rand_func(), rand_word=rand_word(
+    ), greeting=rand_word(), closing=rand_word(), ignore_me=func_ignore_me(), main=main_func(), define_target=define_target(), check_target=check_target(buffersize, 80), win_char=rand_win_char())
     compile(source_code, bin_name)
 
 
@@ -214,7 +227,7 @@ def gen_arm_400(bin_name):
     template = jinja2.Template(
         open('templates/arm-chals/arm400.c.jinja', 'r').read())
     source_code = template.render(header=header_includes(), md5_header=md5_header(
-    ), ignore_me=func_ignore_me(), display_flag=func_display_flag(), main=main_chal_func(),rand_int=rand_int(1, 26),rand_word=rand_str(str_len=8))
+    ), ignore_me=func_ignore_me(), display_flag=func_display_flag(), main=main_chal_func(), rand_int=rand_int(1, 26), rand_word=rand_str(str_len=8))
     arm_compile(source_code, bin_name, flags='-no-pie')
 
 
@@ -222,7 +235,7 @@ def gen_angry_100(bin_name):
     template = jinja2.Template(
         open('templates/angry-chals/angry100.c.jinja', 'r').read())
     source_code = template.render(header=header_includes(), ignore_me=func_ignore_me(
-    ), display_flag=func_display_flag(), main=main_chal_func(),buffersize=rand_int(0x8,0xf))
+    ), display_flag=func_display_flag(), main=main_chal_func(), buffersize=rand_int(0x8, 0xf))
     compile(source_code, bin_name)
 
 
@@ -230,7 +243,7 @@ def gen_angry_200(bin_name):
     template = jinja2.Template(
         open('templates/angry-chals/angry200.c.jinja', 'r').read())
     source_code = template.render(header=header_includes(), ignore_me=func_ignore_me(
-    ), display_flag=func_display_flag(), main=main_chal_func(),buffersize=2)
+    ), display_flag=func_display_flag(), main=main_chal_func(), buffersize=2)
     compile(source_code, bin_name)
 
 
@@ -281,34 +294,34 @@ def build_angry_lab():
 def build_competition_bins():
 
     print("[+] Randomly generating and compiling competition binaries.")
-    for bin_cnt in range(0,10):
+    for bin_cnt in range(0, 10):
         bin_name = 'bin-ret2win-%i' % bin_cnt
         gen_ret2win(bin_name)
- 
-        bin_name = 'bonus-%i' %bin_cnt
+
+        bin_name = 'bonus-%i' % bin_cnt
         gen_bonus(bin_name)
 
         bin_name = 'bin-ret2execve-%i' % bin_cnt
         gen_ret2execve(bin_name)
-        
+
         bin_name = 'bin-ret2syscall-%i' % bin_cnt
         gen_ret2syscall(bin_name)
-        
+
         bin_name = 'bin-ret2system-%i' % bin_cnt
         gen_ret2system(bin_name)
-        
+
         bin_name = 'bin-ret2one-%i' % bin_cnt
         gen_ret2one(bin_name)
-        
+
         bin_name = 'bin-write_gadgets-%i' % bin_cnt
         gen_write_gadgets(bin_name)
-        
+
         bin_name = 'bin-printf_read_var-%i' % bin_cnt
         gen_printf_read_var(bin_name)
-        
+
         #bin_name = 'bin-printf_read_libc-%i' % bin_cnt
-        #gen_printf_read_libc(bin_name)
-        
+        # gen_printf_read_libc(bin_name)
+
         bin_name = 'bin-printf_write_var-%i' % bin_cnt
         gen_printf_write_var(bin_name)
 
@@ -317,26 +330,30 @@ def build_competition_bins():
 
         bin_name = 'bin-rop_parameters-%i' % bin_cnt
         gen_rop_parameters(bin_name)
-        
+
+        bin_name = 'bin-arrayabuse-%i' % bin_cnt
+        gen_arrayabuse(bin_name)
+
 
 if __name__ == '__main__':
     build_type = sys.argv[1]
-    if build_type=='bomb-lab':
+    if build_type == 'bomb-lab':
         build_bomb_lab()
-    elif build_type =='math-lab':
+    elif build_type == 'math-lab':
         build_math_lab()
-    elif build_type=='arm-lab':
+    elif build_type == 'arm-lab':
         build_arm_lab()
-    elif build_type=='angry-lab':
+    elif build_type == 'angry-lab':
         build_angry_lab()
-    elif build_type=='competition':
+    elif build_type == 'competition':
         build_competition_bins()
-    elif build_type=='all':
+    elif build_type == 'all':
         build_competition_bins()
         build_bomb_lab()
         build_math_lab()
         build_arm_lab()
         build_angry_lab()
     else:
-        print("Error: please specify [bomb-lab | math-lab | arm-lab | angry-lab | competition | all]")
+        print(
+            "Error: please specify [bomb-lab | math-lab | arm-lab | angry-lab | competition | all]")
         exit(-1)
